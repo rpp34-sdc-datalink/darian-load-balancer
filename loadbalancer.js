@@ -19,6 +19,9 @@ const serverSwitch = function(req, res, next) {
   }
   next()
 }
+app.get('/loaderio-50c3cee432c101dc71fcebd36cf95b71', (req, res) => {
+  res.sendFile(path.join(__dirname,'/loaderio-50c3cee432c101dc71fcebd36cf95b71.txt'));
+})
 
 app.use(serverSwitch)
 app.use('/reviews', createProxyMiddleware({ target: serverURLs[currentServer], changeOrigin: true }));
