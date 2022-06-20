@@ -19,7 +19,7 @@ const serverSwitch = function(req, res, next) {
   }
   next()
 }
-app.get('/loaderio-2e0bc4c775d5023276a39b3cf12bf9d6', (req, res) => {
+app.get('/loaderio-2e0bc4c775d5023276a39b3cf12bf9d6.txt', (req, res) => {
   res.sendFile(path.join(__dirname,'/loaderio-2e0bc4c775d5023276a39b3cf12bf9d6.txt'));
 })
 
