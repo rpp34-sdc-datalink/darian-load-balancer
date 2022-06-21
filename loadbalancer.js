@@ -15,7 +15,7 @@ let serverReqCount = 0;
 
 const serverSwitch = function(req, res, next) {
   serverReqCount++;
-  if (serverReqCount >= 1000) {
+  if (serverReqCount >= 100) {
     serverReqCount = 0;
     if (currentServer === '1') {
       currentServer = '2';
@@ -23,11 +23,9 @@ const serverSwitch = function(req, res, next) {
       currentServer = '1';
     }
   }
-  console.log({server: serverURLs[currentServer]})
   next()
 }
 let serverURL = serverURLs[currentServer];
-console.log({serverURL})
 
 app.get('/loaderio-2e0bc4c775d5023276a39b3cf12bf9d6.txt', (req, res) => {
   res.sendFile(path.join(__dirname,'/loaderio-2e0bc4c775d5023276a39b3cf12bf9d6.txt'));
