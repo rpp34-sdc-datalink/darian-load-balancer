@@ -11,12 +11,16 @@ const serverURLs = {
   '2': 'http://44.202.58.18:8024'
 }
 let currentServer = '1';
+let serverReqCount = 0;
 
 const serverSwitch = function(req, res, next) {
-  if (currentServer === '1') {
-    currentServer = '2';
-  } else {
-    currentServer = '1';
+  if (serverReqCount >= 1000) {
+    serverReqCount = 0;
+    if (currentServer === '1') {
+      currentServer = '2';
+    } else {
+      currentServer = '1';
+    }
   }
   next()
 }
