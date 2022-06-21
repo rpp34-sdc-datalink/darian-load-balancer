@@ -27,11 +27,26 @@ const serverSwitch = function(req, res, next) {
 }
 let serverURL = serverURLs[currentServer];
 
+app.all('/reviews', (req, res) => {
+  serverReqCount++;
+  if (serverReqCount >= 100) {
+    serverReqCount = 0;
+    if (currentServer === '1') {
+      currentServer = '2';
+    } else {
+      currentServer = '1';
+    }
+  }
+
+    res.redirect(serverURL)
+
+})
+
 app.get('/loaderio-2e0bc4c775d5023276a39b3cf12bf9d6.txt', (req, res) => {
   res.sendFile(path.join(__dirname,'/loaderio-2e0bc4c775d5023276a39b3cf12bf9d6.txt'));
 })
-app.use(serverSwitch)
-app.use('/reviews', createProxyMiddleware({ target: serverURL, changeOrigin: true }));
+// app.use(serverSwitch)
+// app.use('/reviews', createProxyMiddleware({ target: serverURL, changeOrigin: true }));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
