@@ -14,6 +14,7 @@ let currentServer = '1';
 let serverReqCount = 0;
 
 const serverSwitch = function(req, res, next) {
+  serverReqCount++;
   if (serverReqCount >= 1000) {
     serverReqCount = 0;
     if (currentServer === '1') {
