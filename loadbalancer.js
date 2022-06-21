@@ -23,6 +23,7 @@ const serverSwitch = function(req, res, next) {
       currentServer = '1';
     }
   }
+  app.use('/reviews', createProxyMiddleware({ target: serverURL, changeOrigin: true }));
   next()
 }
 app.get('/loaderio-2e0bc4c775d5023276a39b3cf12bf9d6.txt', (req, res) => {
@@ -31,7 +32,6 @@ app.get('/loaderio-2e0bc4c775d5023276a39b3cf12bf9d6.txt', (req, res) => {
 let serverURL = serverURLs[currentServer];
 console.log({serverURL})
 app.use(serverSwitch)
-app.use('/reviews', createProxyMiddleware({ target: serverURL, changeOrigin: true }));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
