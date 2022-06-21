@@ -16,7 +16,6 @@ let serverReqCount = 0;
 const serverSwitch = function(req, res, next) {
   serverReqCount++;
   if (serverReqCount >= 1000) {
-    console.log({currentServer})
     serverReqCount = 0;
     if (currentServer === '1') {
       currentServer = '2';
@@ -29,9 +28,10 @@ const serverSwitch = function(req, res, next) {
 app.get('/loaderio-2e0bc4c775d5023276a39b3cf12bf9d6.txt', (req, res) => {
   res.sendFile(path.join(__dirname,'/loaderio-2e0bc4c775d5023276a39b3cf12bf9d6.txt'));
 })
-
+let serverURL = serverURLs[currentServer];
+console.log({serverURL})
 app.use(serverSwitch)
-app.use('/reviews', createProxyMiddleware({ target: serverURLs[currentServer], changeOrigin: true }));
+app.use('/reviews', createProxyMiddleware({ target: serverURL, changeOrigin: true }));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
