@@ -10,7 +10,7 @@ const serverURLs = {
   '1': 'http://44.203.171.122:8024',
   '2': 'http://44.202.58.18:8024'
 }
-let currentServer = '1';
+let currentServer = '2';
 let serverReqCount = 0;
 
 const serverSwitch = function(req, res, next) {
